@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collection.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Restaurant.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Restaurant.Controllers
 {
-  public class EstablishmentController : Controller
+  public class EstablishmentControllers : Controller
   {
     private readonly RestaurantContext _db;
 
-    public EstablishmentController(EstablishmentContext db)
+    public EstablishmentControllers(RestaurantContext db)
     {
       _db = db;
     }
@@ -29,7 +30,7 @@ namespace Restaurant.Controllers
     [HttpPost]
     public ActionResult Create(Establishment establishment)
     {
-      db.Establishments.Add(establishment);
+      _db.Establishments.Add(establishment);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -43,6 +44,7 @@ namespace Restaurant.Controllers
     public ActionResult Edit(int id)
     {
       Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
+      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "CuisineName");
       return View(thisEstablishment);
     }
 
@@ -58,8 +60,8 @@ namespace Restaurant.Controllers
       Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
       return View(thisEstablishment);
     }
-    [HttpPost]
-    public ActionResult Delete(int ident)
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int ident)
     {
       Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == ident);
       _db.Establishments.Remove(thisEstablishment);

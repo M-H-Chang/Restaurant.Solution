@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.Models;
@@ -15,7 +16,7 @@ namespace Restaurant.Controllers
       _db = db;
     }
 
-    public ActionrResult Index()
+    public ActionResult Index()
     {
       List<Cuisine> model = _db.Cuisines.ToList();
       return View(model);
@@ -42,7 +43,7 @@ namespace Restaurant.Controllers
 
     public ActionResult Edit(int id)
     {
-      Cuisine thisCuisine = _db.Cuisine.FirstOrDefault(cuisine => cuisine.CuisineId == id);
+      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisine => cuisine.CuisineId == id);
       return View(thisCuisine);
     }
 
@@ -52,10 +53,10 @@ namespace Restaurant.Controllers
       return View(thisCuisine);
     }
 
-    [HttpPost]
-    public ActionResult Delete(int ident)
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int ident)
     {
-      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(Cuisine => Cuisine.CuisineID == ident);
+      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(Cuisine => Cuisine.CuisineId == ident);
       _db.Cuisines.Remove(thisCuisine);
       _db.SaveChanges();
       return RedirectToAction("Index");

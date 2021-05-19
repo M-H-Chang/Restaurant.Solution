@@ -3,10 +3,10 @@
 }
 @model Restaurant.Models.Establishment
 <h2>Edit your establishment</h2>
-<h4>Edit this Establishment: @Html.DisplayFor(ModelExpressionProvider => model.EstablishmentName)</h4>
+<h4>Edit this Establishment: @Html.DisplayFor(model => model.EstablishmentName)</h4>
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.EstblishmentId)
+  @Html.HiddenFor(model => model.EstablishmentId)
   @Html.LabelFor(model => model.EstablishmentName)
   @Html.EditorFor(model => model.EstablishmentName)
 
