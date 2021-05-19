@@ -1,0 +1,14 @@
+Main database name
+- Restaurants
+
+Tables
+- Cuisines
+  - CuisineId
+  - Name
+- Establishments(?)
+  - EstablishmentId
+  - Name
+  - type of food => cuisine => CuisineId
+  - Hours of operation 
+  - Rating
+  - Location
