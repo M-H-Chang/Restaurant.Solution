@@ -16,6 +16,12 @@ namespace Restaurant.Controllers
       _db = db;
     }
 
+    public ActionResult Index()
+    {
+      List<Establishment> listOfEstablishments = _db.Establishments.Include(establishment => establishment.Cuisine).ToList();
+      return View(listOfEstablishments);
+    }
+
     public ActionResult Create()
     {
       return View();
@@ -32,6 +38,33 @@ namespace Restaurant.Controllers
     {
       Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
       return View(thisEstablishment);
+    }
+
+    public ActionResult Edit(int id)
+    {
+      Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
+      return View(thisEstablishment);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Establishment establishment)
+    {
+      _db.Entry(establishment).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    public ActionResult Delete(int id)
+    {
+      Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
+      return View(thisEstablishment);
+    }
+    [HttpPost]
+    public ActionResult Delete(int ident)
+    {
+      Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == ident);
+      _db.Establishments.Remove(thisEstablishment);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
