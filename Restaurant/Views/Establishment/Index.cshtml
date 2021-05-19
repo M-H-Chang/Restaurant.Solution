@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Restaurant.Models
+@model List<Restaurant.Models.Establishment>;
+<h1>Establishments</h1>
+@if (@Model.Count == 0)
+{
+  <h3>No establishments have been added to this cuisine</h3>
+}
+
+@foreach (Establishment establishment in Model)
+{
+  <li>@Html.ActionLink($"{establishment.EstablishmentName}", "Details", new {id = establishment.EstablishmentId}) | @establishment.Cuisine.CuisineName</li>
+}
+<p>@Html.ActionLink("Add new establishment", "Create")</p>

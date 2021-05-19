@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Restaurant.Models.Establishment
+
+<h2>Establishment Details for @Html.DisplayFor(model => model.EstablishmentName)</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Hours): @Html.DisplayFor(model => model.Hours)</h3>
+<h3>@Html.DisplayNameFor(model => model.Location): @Html.DisplayFor(model => model.Location)</h3>
+<h3>@Html.DisplayNameFor(model => model.Rating): @Html.DisplayFor(model => model.Rating)</h3>
+
+<p>@Html.ActionLink("Edit Establishment", "Edit", new { id = Model.EstablishmentId })</p>
+<p>@Html.ActionLink("Delete Establishment", "Delete", new { id = Model.EstablishmentId })</p>
+<p>@Html.ActionLink("Back to Establishment List", "Index")</p>
