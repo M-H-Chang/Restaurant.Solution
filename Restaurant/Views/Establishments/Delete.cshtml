@@ -9,7 +9,6 @@
 @Html.DisplayNameFor(model => model.EstablishmentName); @Html.DisplayFor(model => model.EstablishmentName)
 @using (Html.BeginForm())
 {
-  @Html.Hidden("ident", "model.establishmentid")
   <input type="submit" value="Delete" />
 }
 @Html.ActionLink("Back to List", "Index")

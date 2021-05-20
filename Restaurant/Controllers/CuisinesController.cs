@@ -54,9 +54,9 @@ namespace Restaurant.Controllers
     }
 
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int ident)
+    public ActionResult DeleteConfirmed(int id)
     {
-      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(Cuisine => Cuisine.CuisineId == ident);
+      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(Cuisine => Cuisine.CuisineId == id);
       _db.Cuisines.Remove(thisCuisine);
       _db.SaveChanges();
       return RedirectToAction("Index");

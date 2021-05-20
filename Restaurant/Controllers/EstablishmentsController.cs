@@ -62,9 +62,9 @@ namespace Restaurant.Controllers
       return View(thisEstablishment);
     }
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int ident)
+    public ActionResult DeleteConfirmed(int id)
     {
-      Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == ident);
+      Establishment thisEstablishment = _db.Establishments.FirstOrDefault(establishment => establishment.EstablishmentId == id);
       _db.Establishments.Remove(thisEstablishment);
       _db.SaveChanges();
       return RedirectToAction("Index");
