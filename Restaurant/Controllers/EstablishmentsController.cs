@@ -1,18 +1,18 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Restaurant.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Restaurant.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Restaurant.Controllers
 {
-  public class EstablishmentControllers : Controller
+  public class EstablishmentsController : Controller
   {
     private readonly RestaurantContext _db;
 
-    public EstablishmentControllers(RestaurantContext db)
+    public EstablishmentsController(RestaurantContext db)
     {
       _db = db;
     }
@@ -25,6 +25,7 @@ namespace Restaurant.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "CuisineName");
       return View();
     }
     [HttpPost]
