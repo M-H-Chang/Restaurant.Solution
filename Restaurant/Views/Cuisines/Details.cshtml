@@ -2,11 +2,19 @@
   Layout = "_Layout";
 }
 
+@using Restaurant.Models
 @model Restaurant.Models.Cuisine
 
 <h2>Cuisine Details</h2>
 <hr />
 <h3>Name: @Html.DisplayFor(model => model.CuisineName)</h3>
+
+<ul>
+  @foreach (Establishment establishment in Model.Establishments)
+  {
+    <li>@Html.ActionLink($"{establishment.EstablishmentName}", "Details", "Establishments", new { id = establishment.EstablishmentId})</li>
+  }
+</ul>
 
 <p>@Html.ActionLink("Edit Cuisine", "Edit", new { id = Model.CuisineId })</p>
 <p>@Html.ActionLink("Delete Cuisine", "Delete", new { id = Model.CuisineId })</p>
